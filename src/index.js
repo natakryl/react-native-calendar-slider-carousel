@@ -1,6 +1,5 @@
 import React from 'react';
 import { Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-
 import moment from 'moment';
 import constants from './constants';
 import style from './style';
@@ -32,7 +31,6 @@ export default class CalendarDays extends React.Component {
   }
 
   setScrollOffset = (index) => {
-    const { showArrows } = this.props;
     if (this.scrollView) {
       const { width, daysInView } = this.props;
 
@@ -40,13 +38,12 @@ export default class CalendarDays extends React.Component {
       if (width || daysInView) {
         scrollViewWidth = width || daysInView * constants.DAY_SIZE;
       }
-      const xOffset = constants.DAY_SIZE * index
-        + (constants.DAY_SIZE - scrollViewWidth) / 2
-        + (scrollViewWidth % constants.DAY_SIZE) / 2;
+      const xOffset =
+        constants.DAY_SIZE * index +
+        (constants.DAY_SIZE - scrollViewWidth) / 2 +
+        (scrollViewWidth % constants.DAY_SIZE) / 2;
 
-      const scrollOffset = { x: xOffset, animated: true };
-
-      this.scrollView.scrollTo(scrollOffset);
+      this.scrollView.scrollTo({ x: xOffset, animated: true });
     }
   };
 
@@ -70,9 +67,8 @@ export default class CalendarDays extends React.Component {
 
   dateSelect = (props) => {
     const { onDateSelect } = this.props;
-    this.setState(
-      { selectedDayIndex: props.key },
-      this.setScrollOffset(props.key),
+    this.setState({ selectedDayIndex: props.key }, () =>
+      this.setScrollOffset(props.key)
     );
 
     if (typeof onDateSelect === 'function') {
@@ -131,7 +127,6 @@ export default class CalendarDays extends React.Component {
       dayLabelTextStyle,
     } = this.props;
 
-
     let scrollWidth = null;
     if (width) {
       scrollWidth = width;
@@ -151,35 +146,43 @@ export default class CalendarDays extends React.Component {
 
     if (availableDates) {
       days = availableDates.map((val, key) => {
-        const isClosedStyle = val.open ? null : style.closed;
-
-        const isClosedMonthStyle = val.disabled
-          ? style.monthContainerClosed
-          : null;
-
-        const selectedStyle = selectedDayIndex === key ? activeDateContainerStyle : null;
+        const isSelected = selectedDayIndex === key;
 
         return (
           <TouchableOpacity
             key={key}
             disabled={val.disabled}
-            onPress={() => this.dateSelect({ key, date: availableDates[key].date })
+            onPress={() =>
+              this.dateSelect({ key, date: availableDates[key].date })
             }
           >
-            <View style={[style.singleContainer, Platform.OS !== 'web' ? selectedStyle : null, activeDateContainerStyle]}>
-              <View style={[style.singleDateBox, dateContainerStyle, selectedStyle]}>
-                
-                {/* <View style={[style.monthContainer, isClosedMonthStyle]}>
-                  <Text style={style.monthText}>{val.month}</Text>
-                </View> */}
-                <View style={[styles.dateContainer, dateContainerStyle]}>
-                  <Text style={[style.dateText, isClosedStyle, dateTextStyle]}>{val.day}</Text>
-                </View>
-                <View style={style.dayContainer}>
-                  <Text style={[style.dayText, isClosedStyle, dayLabelTextStyle]}>
-                    {val.disabled && disabledText ? daysProps.disabledText : val.day_of_week}
-                  </Text>
-                </View>
+            <View style={style.singleContainer}>
+              <View
+                style={[
+                  style.singleDateBox,
+                  dateContainerStyle,
+                  isSelected && activeDateContainerStyle,
+                ]}
+              >
+                <Text
+                  style={[
+                    style.dateText,
+                    dateTextStyle,
+                    isSelected && activeDateTextStyle,
+                  ]}
+                >
+                  {val.day}
+                </Text>
+                <Text
+                  style={[
+                    style.dayText,
+                    dayLabelTextStyle,
+                  ]}
+                >
+                  {val.disabled && disabledText
+                    ? daysProps.disabledText
+                    : val.day_of_week}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -188,12 +191,21 @@ export default class CalendarDays extends React.Component {
     }
 
     return (
-      <View style={{ height: constants.DAY_SIZE, width: scrollWidth, flexDirection: 'row' }}>
-        {showArrows ?
-          <TouchableOpacity style={style.arrow} onPress={() => this.scroll('left')}>
+      <View
+        style={{
+          height: constants.DAY_SIZE,
+          width: scrollWidth,
+          flexDirection: 'row',
+        }}
+      >
+        {showArrows ? (
+          <TouchableOpacity
+            style={style.arrow}
+            onPress={() => this.scroll('left')}
+          >
             {leftArrow}
           </TouchableOpacity>
-          : null}
+        ) : null}
         <ScrollView
           ref={(scrollView) => {
             this.scrollView = scrollView;
@@ -211,11 +223,14 @@ export default class CalendarDays extends React.Component {
           <View style={{ width: (scrollWidth % constants.DAY_SIZE) / 2 }} />
           {days || null}
         </ScrollView>
-        {showArrows ?
-          <TouchableOpacity style={style.arrow} onPress={() => this.scroll('right')}>
+        {showArrows ? (
+          <TouchableOpacity
+            style={style.arrow}
+            onPress={() => this.scroll('right')}
+          >
             {rightArrow}
           </TouchableOpacity>
-          : null}
+        ) : null}
       </View>
     );
   }
