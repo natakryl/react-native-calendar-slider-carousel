@@ -2,8 +2,8 @@ import React from 'react';
 import { Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import moment from 'moment';
-import style from './style';
 import constants from './constants';
+import style from './style';
 
 export default class CalendarDays extends React.Component {
   constructor(props) {
@@ -124,7 +124,13 @@ export default class CalendarDays extends React.Component {
       showArrows,
       leftArrow,
       rightArrow,
+      dateContainerStyle,
+      activeDateContainerStyle,
+      dateTextStyle,
+      activeDateTextStyle,
+      dayLabelTextStyle,
     } = this.props;
+
 
     let scrollWidth = null;
     if (width) {
@@ -161,18 +167,16 @@ export default class CalendarDays extends React.Component {
             }
           >
             <View style={[style.singleContainer, Platform.OS !== 'web' ? selectedStyle : null]}>
-              <View style={[style.singleDateBox, selectedStyle]}>
-                <View style={[style.monthContainer, isClosedMonthStyle]}>
+              <View style={[style.singleDateBox, selectedStyle, activeDateContainerStyle]}>
+                {/* <View style={[style.monthContainer, isClosedMonthStyle]}>
                   <Text style={style.monthText}>{val.month}</Text>
-                </View>
-                <View style={style.dateContainer}>
-                  <Text style={[style.dateText, isClosedStyle]}>{val.day}</Text>
+                </View> */}
+                <View style={[styles.dateContainer, dateContainerStyle]}>
+                  <Text style={[style.dateText, isClosedStyle, dateTextStyle]}>{val.day}</Text>
                 </View>
                 <View style={style.dayContainer}>
-                  <Text style={[style.dayText, isClosedStyle]}>
-                    {val.disabled && disabledText
-                      ? daysProps.disabledText
-                      : val.day_of_week}
+                  <Text style={[style.dayText, isClosedStyle, dayLabelTextStyle]}>
+                    {val.disabled && disabledText ? daysProps.disabledText : val.day_of_week}
                   </Text>
                 </View>
               </View>
@@ -203,7 +207,7 @@ export default class CalendarDays extends React.Component {
           decelerationRate="fast"
           showsHorizontalScrollIndicator={false}
         >
-          <View style={{ width: (scrollWidth % constants.DAY_SIZE) / 2 }}/>
+          <View style={{ width: (scrollWidth % constants.DAY_SIZE) / 2 }} />
           {days || null}
         </ScrollView>
         {showArrows ?

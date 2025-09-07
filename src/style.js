@@ -33,29 +33,31 @@ export default StyleSheet.create({
   singleContainerSelected: {
     shadowOpacity: 0.3,
     shadowRadius: 4,
+    backgroundColor:'#000',
+    color:'#fff',
     shadowOffset: {
       height: 2,
       width: 2,
     },
     elevation: 6,
   },
-  closed: {
-    color: constants.MONTH_BACKGROUND_COLOR_DISABLED,
-  },
-  monthContainerClosed: {
-    backgroundColor: constants.MONTH_BACKGROUND_COLOR_DISABLED,
-  },
-  monthContainer: {
-    height: 25,
-    backgroundColor: constants.MONTH_BACKGROUND_COLOR,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  monthText: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#fff',
-  },
+  // closed: {
+  //   color: constants.MONTH_BACKGROUND_COLOR_DISABLED,
+  // },
+  // monthContainerClosed: {
+  //   backgroundColor: constants.MONTH_BACKGROUND_COLOR_DISABLED,
+  // },
+  // monthContainer: {
+  //   height: 25,
+  //   backgroundColor: constants.MONTH_BACKGROUND_COLOR,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
+  // monthText: {
+  //   fontSize: 16,
+  //   textAlign: 'center',
+  //   color: '#fff',
+  // },
   dateContainer: {
     height: 50,
   },
