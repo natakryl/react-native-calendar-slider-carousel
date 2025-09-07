@@ -157,7 +157,7 @@ export default class CalendarDays extends React.Component {
           ? style.monthContainerClosed
           : null;
 
-        const selectedStyle = selectedDayIndex === key ? style.singleContainerSelected : null;
+        const selectedStyle = selectedDayIndex === key ? style.activeDateContainerStyle : null;
 
         return (
           <TouchableOpacity
@@ -166,8 +166,8 @@ export default class CalendarDays extends React.Component {
             onPress={() => this.dateSelect({ key, date: availableDates[key].date })
             }
           >
-            <View style={[style.singleContainer, Platform.OS !== 'web' ? selectedStyle : null]}>
-              <View style={[style.singleDateBox, selectedStyle, activeDateContainerStyle]}>
+            <View style={[style.singleContainer, Platform.OS !== 'web' ? selectedStyle : null, activeDateContainerStyle]}>
+              <View style={[style.singleDateBox, selectedStyle, dateContainerStyle]}>
                 {/* <View style={[style.monthContainer, isClosedMonthStyle]}>
                   <Text style={style.monthText}>{val.month}</Text>
                 </View> */}
