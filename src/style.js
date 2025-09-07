@@ -33,7 +33,7 @@ export default StyleSheet.create({
   singleContainerSelected: {
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    backgroundColor:'#000',
+    backgroundColor:'#975a5aff',
     color:'#fff',
     shadowOffset: {
       height: 2,
