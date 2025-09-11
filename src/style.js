@@ -75,7 +75,7 @@ export default StyleSheet.create({
     color: '#000',
   },
   arrow: {
-    height: constants.DAY_SIZE,
+    // height: constants.DAY_SIZE,
     width: 36,
     justifyContent: 'center',
     alignItems: 'center'
