@@ -125,6 +125,7 @@ export default class CalendarDays extends React.Component {
       dateTextStyle,
       activeDateTextStyle,
       dayLabelTextStyle,
+      activeDayLabelTextStyle,
     } = this.props;
 
     let scrollWidth = null;
@@ -177,7 +178,7 @@ export default class CalendarDays extends React.Component {
                   style={[
                     style.dayText,
                     dayLabelTextStyle,
-                    isSelected && activeDateTextStyle
+                    isSelected && activeDayLabelTextStyle
                   ]}
                 >
                   {val.disabled && disabledText
