@@ -177,7 +177,7 @@ export default class CalendarDays extends React.Component {
                   style={[
                     style.dayText,
                     dayLabelTextStyle,
-                    activeDateTextStyle
+                    isSelected && activeDateTextStyle
                   ]}
                 >
                   {val.disabled && disabledText
