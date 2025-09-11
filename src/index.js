@@ -96,7 +96,7 @@ export default class CalendarDays extends React.Component {
       dates.push({
         date: date.format('YYYY-MM-DD'),
         day: date.format('D'),
-        day_of_week: date.format('dddd'),
+        day_of_week: date.format('ddd'),
         month: date.format('MMMM'),
         disabled: isDisabled,
       });
